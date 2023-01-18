@@ -19,7 +19,7 @@
 
 				<!-- Header -->
 					<header id="header">
-						<h1><a href="index.html">AI Martial Arts</a></h1>
+						<h1><a href="martial.html">AI Martial Arts</a></h1>
 						<nav>
 							<a href="#menu">Menu</a>
 						</nav>
@@ -71,8 +71,7 @@
 										Below we present an example of how this latter architecture works:
 									</p>
 
-									<!-- <p>This two streams are then fused (late fusion cite) to achieve greater accuracy. This two-stream model achieves an accuracy of BLA, in the provisory (uh) dataset that we describe below. 
-										Why it's good. </p>  -->
+							
 
 									<div class="row gtr-uniform">
 										<div class="col-4"><span class="image fit"><img src="images/gif1skele.gif" alt="" /></span></div>
@@ -80,7 +79,7 @@
 										<div class="col-4"><span class="image fit"><img src="images/gif1limb.gif" alt="" /></span></div>
 									</div>
 									<i> On the left we can see the pose estimation results over an example clip, the center and right images show the volume visualizations for the keypoint and limb heatmaps, respectively. 
-										The original video here used was provided with a Creative Commons (CC) license, link?</i>
+										The original video here used was provided with a <a href='https://creativecommons.org/licenses/by/4.0/'>Creative Commons (CC) license</a></i>
 									
 									<p> </p>
 
@@ -140,13 +139,7 @@
 										All in all, a highly successful model but we recall that it learns from the full RGB video data. 
 										We want to go one step further and train a model to learn just from the motion of each martial art practitioner.
 									</p>
-										
-									<!-- <p>top1_acc: 0.9688</p>
-										<p>top2_acc: 0.9844</p>
-										<p>top3_acc: 0.9844</p>
-										<p>top4_acc: 0.9844</p>
-										<p>top5_acc: 1.0000</p> -->
-									
+																	
 									<h3 class="minor">Skeleton-based modeling</h3>
 
 									<p> For the skeleton-based modeling the highest performing architecture was that of the <a href="https://arxiv.org/abs/2104.13586">PoseC3D</a> model, which relies on 3D heatmaps instead of graph convolutional networks to achieve state of the art results. 
@@ -193,7 +186,6 @@
 												<li>An increase in size and scale of the project is a natural next step, both in terms of data and number of classes.</li>
 												<li>The fusing of the two different modality streams in different ways to achieve an even more accurate classifier.</li>
 												<li>Improvement on the generation of skeleton annotations, specially for the most difficult classes (e.g. grappling).</li>
-												
 												<li>The development of a Reinforcement Learning (RL) architecture that can recreate the already classified movements, through techniques like Imitation Learning. Currently in examination.</li>
 											</ul>
 										</div>
@@ -251,7 +243,6 @@
 									Juan Manuel Pérez Ipiña<br />
 								</li>
 								<!--<li class="icon solid fa-phone">(000) 000-0000</li> -->
-								<!--<li class="icon solid fa-envelope"><a href="#">jmperezipina@gmail.com</a></li>-->
 								<li class="icon brands fa-linkedin"><a href="https://www.linkedin.com/in/jmpipina/">linkedin.com/jmpipina</a></li>
 								<li class="icon brands fa-github"><a href="https://github.com/jmpipina">github.com/jmpipina</a></li>
 							</ul>
