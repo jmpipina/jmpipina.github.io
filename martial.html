@@ -1,0 +1,276 @@
+<!DOCTYPE HTML>
+<!--
+	Solid State by HTML5 UP
+	html5up.net | @ajlkn
+	Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
+-->
+<html>
+	<head>
+		<title>Martial Arts AI - JMPI</title>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+		<link rel="stylesheet" href="assets/css/main.css" />
+		<noscript><link rel="stylesheet" href="assets/css/noscript.css" /></noscript>
+	</head>
+	<body class="is-preload">
+
+		<!-- Page Wrapper -->
+			<div id="page-wrapper">
+
+				<!-- Header -->
+					<header id="header">
+						<h1><a href="index.html">AI Martial Arts</a></h1>
+						<nav>
+							<a href="#menu">Menu</a>
+						</nav>
+					</header>
+
+				<!-- Menu -->
+					<nav id="menu">
+						<div class="inner">
+							<h2>Menu</h2>
+							<ul class="links">
+								<li><a href="index.html">Home</a></li>
+								<li><a href="martial.html">AI Martial Arts</a></li>
+								<!-- <li><a href="elements.html">Elements</a></li> -->
+								<li><a href="https://www.linkedin.com/in/jmpipina/">Contact</a></li>
+							<!--	<li><a href="#">Log In</a></li>
+								<li><a href="#">Sign Up</a></li>-->
+							</ul>
+							<a href="#" class="close">Close</a>
+						</div>
+					</nav>
+
+				<!-- Wrapper -->
+					<section id="wrapper">
+						<header>
+							<div class="inner">
+								<h2>Teaching an AI Martial Arts</h2>
+								<p> Building a state of the art computer vision classifier in an unexplored domain.</p>
+							</div>
+						</header>
+
+						<!-- Content -->
+							<div class="wrapper">
+								<div class="inner">
+
+									<blockquote> "I fear not the algorithm who has practiced 10,000 kicks once, but I fear the algorithm who has practiced one kick 10,000 times."</blockquote>
+									
+
+									<h3 class="major">Summary</h3>
+									<p>In this project we build and train a computer vision system to accurately classify different styles of martial arts.
+										To achieve this, state of the art Human Action Recognition (HAR) techniques in the realm of video learning were adapted to the problem at hand. <br />
+									</p>
+
+									<p> A completely new dataset was built to train this ML model, from publicly available video data. 
+										This is in opposition to motion capture data, which would offer a clean and controlled data source but expensive and restrictive in the landscape of possible applications.
+										The internet is a massive database of readily available real world data and the goal is to develop a ML model that can learn from it; a final product more suited for its use in real world applications.</p>
+
+									<p> First we develop a classifier trained on the <i>3D RGB</i> video data, obtaining a high-precision model with a mean class accuracy of <b>97.34%</b> in only a few epochs.
+										We go one step further though, since we want the system to learn the intrinsic motions that characterize each martial art, so we also develop a <i>skeleton based model</i>.
+										Below we present an example of how this latter architecture works:
+									</p>
+
+									<!-- <p>This two streams are then fused (late fusion cite) to achieve greater accuracy. This two-stream model achieves an accuracy of BLA, in the provisory (uh) dataset that we describe below. 
+										Why it's good. </p>  -->
+
+									<div class="row gtr-uniform">
+										<div class="col-4"><span class="image fit"><img src="images/gif1skele.gif" alt="" /></span></div>
+										<div class="col-4"><span class="image fit"><img src="images/gif1keypo.gif" alt="" /></span></div>
+										<div class="col-4"><span class="image fit"><img src="images/gif1limb.gif" alt="" /></span></div>
+									</div>
+									<i> On the left we can see the pose estimation results over an example clip, the center and right images show the volume visualizations for the keypoint and limb heatmaps, respectively. 
+										The original video here used was provided with a Creative Commons (CC) license, link?</i>
+									
+									<p> </p>
+
+									<p>
+										This project was developed as a hobby, with no commercial purposes in mind. 
+										However, the initial success of this endeavor shine a positive light on the possible applications and use-cases, whether in the realm of video security,
+										 entertainment or videogame industry, and more.
+										Next, we briefly summarize the workings of the models and the dataset, for the interested reader.
+									</p>
+									<h3 class="major">Data</h3>
+									<p>	As noted before, a new dataset was developed in order to train the models. Naturally, using motion capture techniques would generate a lot of clean and controlled data, 
+										which would simplify considerably the work of the neural network. However, we want the model to be able to learn from the already available massive amount of real world video data.
+										For that reason, the dataset was composed of publicly available videos of people practicing martial arts in a wide variety of scenarios 
+										(different amount of practitioners, differing backgrounds, distinct video qualities, filming angles, etc). This complicates the classification problem but makes the result much more applicable and generalizable.
+									</p>
+									<p>
+										For the first built dataset, six popular martial arts were chosen as classes: <i>Boxing, Brazilian Jiu-Jitsu (BJJ), Tai Chi, Capoeira, Judo and Taekwondo</i>. 
+										These disciplines were chosen not just because of their popularity but also because of the notable physical difference among them, as a first approach to this problem.
+										A number of videos were obtained from the web from differing search queries to represent a wide array of scenarios. A script was developed to extract a consistent amount of ~10 seconds-clips from this batch of videos. After a period of manually cleaning the extracted clips, a first dataset of 849 clips was constructed.
+										It was then split into training, validation and testing subsets as is customary, in a chosen split of (0.7, 0.15, 0.15). The distribution of this first (full) dataset among the classes can be seen in the histogram below.
+									</p>
+
+									<p><span class="image left"><img src="images/histogram_full_data1v2.png" alt="" /></span></p>
+
+									<p>
+										The manual labor that went into cleaning and checking the labels of each clip, is a considerable strength of this dataset. This gives confidence in the usefulness of each video and the reliability of the labels.
+										The biggest weakness, however, is its size. An extension of this dataset is currently being developed, since it's a straightforward task, but one with considerable computation and hardware requirements.
+									</p>
+										We note that the dataset is only slightly imbalanced, with some classes being overrepresented in comparison with others. 
+										This is also intended to be amended in the second and larger version of the dataset.
+									</p>
+
+									<h3 class="major">Training and results</h3>
+									<p> The generated dataset will be used to train two different kinds of architectures: one that learnes from the full 3D RGB data, and another that will learn purely from skeleton data.
+										Different architectures were tried for each case, we present here the ones that gave the best results.</p>
+									<p>The models and training were developed under the framework of <a href="https://github.com/open-mmlab/mmaction2">MMAction2</a>.
+										Training for all models was done using the GPUs available in the free version of Google Colab.
+									</p>
+
+									<h3 class="minor">RGB-based modeling</h3>
+
+									<p> For the RGB-based modeling the highest performing architecture was that of the <a href="https://arxiv.org/abs/2102.05095">TimeSformer</a> model, which adapts the standard Transformer architecture to achieve state of the art results in video learning. 
+										To finetune this architecture, we start from the <a href='https://mmaction2.readthedocs.io/en/latest/recognition_models.html#id43'>TimeSformer model pre-trained on the Kinetics-400 dataset</a>, and adapt it for training in our custom dataset. 
+									</p>
+									
+									<p><span class="image left"><img src="images/Times_loss_graph1.png" alt="" /></span></p>
+									
+									<p>To the left, we can see a plot of the loss function after only 10 epochs. 
+										We see that it rapidly decreases down to a small stable value, consistent with the improvement in accuracy that was observed throughout training (as was the case for the accuracy in the validation set, which was routinely checked to avoid overfitting).
+										However, training was substantially slow, which is something to be improved in the second version of this project (for example, by reducing the quality of the input videos in the data pipeline).
+									</p>
+
+									<p><span class="image right"><img src="images/Times_confumatrix1.png" alt="" /></span></p>
+
+									<p> We can then analyze performance on the test set, for which we obtain a mean class accuracy of <b>97.34%</b> (top1_acc: 0.9688, top5_acc: 1.0000), which is quite high for such a short training regime.
+										We can also plot the confusion matrix for this model, and see how few mistakes it actually does in the test set.
+										All in all, a highly successful model but we recall that it learns from the full RGB video data. 
+										We want to go one step further and train a model to learn just from the motion of each martial art practitioner.
+									</p>
+										
+									<!-- <p>top1_acc: 0.9688</p>
+										<p>top2_acc: 0.9844</p>
+										<p>top3_acc: 0.9844</p>
+										<p>top4_acc: 0.9844</p>
+										<p>top5_acc: 1.0000</p> -->
+									
+									<h3 class="minor">Skeleton-based modeling</h3>
+
+									<p> For the skeleton-based modeling the highest performing architecture was that of the <a href="https://arxiv.org/abs/2104.13586">PoseC3D</a> model, which relies on 3D heatmaps instead of graph convolutional networks to achieve state of the art results. 
+										The pre-trained architecture used was that of <a href='https://mmaction2.readthedocs.io/en/latest/skeleton_models.html#ucf101'>PoseC3D model on the UCF101 dataset</a>. After adapting it to our dataset, and generating the necessary skeleton annotations for all clips, we proceeded with the training.
+									</p>
+									
+									<p><span class="image left"><img src="images/pose_loss_graph1.png" alt="" /></span></p>
+
+									<p>To the left, we can see a plot of the loss function after 50 epochs. We again see its rapid decrease and here the model could have actually been stopped several epochs earlier.
+										Training was reasonably fast, given that most of the hard work was done before in generating the skeleton annotations. 
+										We then proceed to evaluating the model on the designated test set.
+									</p>
+
+									<p><span class="image right"><img src="images/pose_confumatrix1.png" alt="" /></span></p>
+
+									<p> On the test set we obtain a mean class accuracy of <b>84.46%</b> (top1_acc: 0.8438, top5_acc: 0.9844), which is reasonably high but lower than the 3D RGB model.
+										We see from the confusion matrix, however, that the performance varies a lot by class. 
+										Some difficulties were to be expected, for example the fact that the skeleton based model has issues distinguishing the grappling martial arts of judo and BJJ.
+										From manual examination of the generated skeleton annotations for these cases, one can see that complications arise in distinguishing two different people when they are that close together with interweaving limbs.
+										This difficulty could be addressed by manually improving the skeleton generation for the grappling martial arts so that it correctly learns to distinguish these situations.
+									</p>
+
+									<h3 class="major">Outlook</h3>
+									<p> This was an overview of a first approach examination of the application of state of the art HAR techniques to an unexplored domain, the world of martial arts.
+										The proposed objectives of the project were all satisfactorily achieved, and many possible extensions of this work have arisen and are left for future endeavors.
+										In particular, we name below the main highlights of both these categories.
+									</p>
+									
+									<div class="row">
+										<div class="col-12-medium">
+											<h4> Successes</h4>
+											<ul>
+												<li>The construction of a completely new video dataset of martial art actions.</li>
+												<li>The adaptation and training of a 3D RGB architecture on this dataset, obtaining a ML classifier that can distinguish among martial arts to a high degree of precision.</li>
+												<li>The further development of a skeleton based classifier, that can differentiate among the martial arts through motion alone, since it is trained only on skeleton data.</li>
+											</ul>
+										</div>
+									</div>
+
+									<div class="row">
+										<div class="col-12-medium">
+											<h4> Open problems and future extensions</h4>
+											<ul>
+												<li>An increase in size and scale of the project is a natural next step, both in terms of data and number of classes.</li>
+												<li>The fusing of the two different modality streams in different ways to achieve an even more accurate classifier.</li>
+												<li>Improvement on the generation of skeleton annotations, specially for the most difficult classes (e.g. grappling).</li>
+												
+												<li>The development of a Reinforcement Learning (RL) architecture that can recreate the already classified movements, through techniques like Imitation Learning. Currently in examination.</li>
+											</ul>
+										</div>
+									</div>
+									<!-- 
+									<section class="features">
+										<article>
+											<a href="#" class="image"><img src="images/pic04.jpg" alt="" /></a>
+											<h3 class="major">Sed feugiat lorem</h3>
+											<p>Lorem ipsum dolor sit amet, consectetur adipiscing vehicula id nulla dignissim dapibus ultrices.</p>
+											<a href="#" class="special">Learn more</a>
+										</article>
+										<article>
+											<a href="#" class="image"><img src="images/pic05.jpg" alt="" /></a>
+											<h3 class="major">Nisl placerat</h3>
+											<p>Lorem ipsum dolor sit amet, consectetur adipiscing vehicula id nulla dignissim dapibus ultrices.</p>
+											<a href="#" class="special">Learn more</a>
+										</article>
+									</section>
+									 -->
+
+								</div>
+							</div>
+
+					</section>
+
+				<!-- Footer -->
+					<section id="footer">
+						<div class="inner">
+							<!-- 
+							<h2 class="major">Get in touch</h2>
+							<p>Cras mattis ante fermentum, malesuada neque vitae, eleifend erat. Phasellus non pulvinar erat. Fusce tincidunt, nisl eget mattis egestas, purus ipsum consequat orci, sit amet lobortis lorem lacus in tellus. Sed ac elementum arcu. Quisque placerat auctor laoreet.</p>
+							<form method="post" action="#">
+								<div class="fields">
+									<div class="field">
+										<label for="name">Name</label>
+										<input type="text" name="name" id="name" />
+									</div>
+									<div class="field">
+										<label for="email">Email</label>
+										<input type="email" name="email" id="email" />
+									</div>
+									<div class="field">
+										<label for="message">Message</label>
+										<textarea name="message" id="message" rows="4"></textarea>
+									</div>
+								</div>
+								<ul class="actions">
+									<li><input type="submit" value="Send Message" /></li>
+								</ul>
+							</form>
+							-->
+							<ul class="contact">
+								<li class="icon solid fa-home">
+									Juan Manuel Pérez Ipiña<br />
+								</li>
+								<!--<li class="icon solid fa-phone">(000) 000-0000</li> -->
+								<!--<li class="icon solid fa-envelope"><a href="#">jmperezipina@gmail.com</a></li>-->
+								<li class="icon brands fa-linkedin"><a href="https://www.linkedin.com/in/jmpipina/">linkedin.com/jmpipina</a></li>
+								<li class="icon brands fa-github"><a href="https://github.com/jmpipina">github.com/jmpipina</a></li>
+							</ul>
+							<ul class="copyright">
+								<!--<li>&copy; Untitled Inc. All rights reserved.</li>-->
+								<li>Design: <a href="http://html5up.net">HTML5 UP</a></li>
+							</ul>
+						</div>
+					</section>
+
+			</div>
+
+		<!-- Scripts -->
+			<script src="assets/js/jquery.min.js"></script>
+			<script src="assets/js/jquery.scrollex.min.js"></script>
+			<script src="assets/js/browser.min.js"></script>
+			<script src="assets/js/breakpoints.min.js"></script>
+			<script src="assets/js/util.js"></script>
+			<script src="assets/js/main.js"></script>
+
+	</body>
+</html>
