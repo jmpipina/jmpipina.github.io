@@ -1,4 +1,4 @@
-Project portfolio repository, please go to [this link](https://jmpipina.github.io).
+Project portfolio repository, please go to https://jmpipina.github.io.
 
 
 Web template by:
